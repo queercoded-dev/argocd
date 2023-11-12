@@ -1,3 +1,4 @@
+namespace: webring
 generators:
   - ./kustomize-secret-generator.yaml
 
@@ -10,6 +11,7 @@ helmCharts:
   version: "0.1.1"
   repo: https://queercoded-dev.github.io/charts
   includeCRDs: false
+  namespace: webring
   valuesInline:
     image:
       pullPolicy: Always
