@@ -57,7 +57,7 @@ helmCharts:
             key: password
       POSTGRES_USER: webring
       POSTGRES_DB: webring
-      POSTGRES_HOST: postgres-service
+      POSTGRES_HOST: webring-postgresql 
       POSTGRES_PORT: 5432
       WEBRING_API_TOKEN:
         valueFrom:
