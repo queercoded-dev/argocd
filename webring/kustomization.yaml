@@ -15,6 +15,7 @@ helmCharts:
   valuesInline:
     image:
       pullPolicy: Always
+      tag: latest
     replicaCount: 1
     
     ingress:
