@@ -18,15 +18,15 @@ helmCharts:
           secretKeyRef:
             name: webring-postgresql
             key: password
-      POSTGRES_USER: webring
-      POSTGRES_DB: webring
-      POSTGRES_HOST: webring-postgresql 
-      POSTGRES_PORT: 5432
       WEBRING_API_TOKEN:
         valueFrom:
           secretKeyRef:
             name: webring-admin-api-token 
             key: api-token
+      POSTGRES_USER: webring
+      POSTGRES_DB: webring
+      POSTGRES_HOST: webring-postgresql 
+      POSTGRES_PORT: 5432
       WEBRING_HOST: webring.queercoded.dev
       WEBRING_PATH: /
       WEBRING_HTTP_PORT: 80
