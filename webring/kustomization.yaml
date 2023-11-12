@@ -8,7 +8,7 @@ resources:
 helmCharts:
 - name: webring
   releaseName: webring
-  version: "0.1.4"
+  version: "0.1.5"
   repo: https://queercoded-dev.github.io/charts
   namespace: webring
   valuesInline:
