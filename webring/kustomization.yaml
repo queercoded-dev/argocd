@@ -25,7 +25,7 @@ helmCharts:
       WEBRING_API_TOKEN:
         valueFrom:
           secretKeyRef:
-            name: webring-api-token
+            name: webring-admin-api-token 
             key: api-token
       WEBRING_HOST: webring.queercoded.dev
       WEBRING_PATH: /
