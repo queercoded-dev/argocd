@@ -1,0 +1,16 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: webring-cert
+  namespace: webring
+spec:
+  secretName: webring-cert
+  commonName: webring.queercoded.dev
+  dnsNames:
+    - "webring.queercoded.dev"
+  issuerRef:
+    name: queercoded-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+...

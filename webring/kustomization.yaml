@@ -1,0 +1,67 @@
+generators:
+  - ./kustomize-secret-generator.yaml
+
+resources:
+  - ./webring-cert.yaml
+
+helmCharts:
+- name: webring
+  releaseName: webring
+  version: "0.1.1"
+  repo: https://queercoded-dev.github.io/charts
+  includeCRDs: false
+  valuesInline:
+    image:
+      pullPolicy: Always
+    replicaCount: 1
+    
+    ingress:
+      enabled: true
+      className: "nginx"
+      annotations:
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"  # Cloudflare E2E enabled
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"  # Cloudflare E2E enabled
+      hosts:
+        - host: "webring.queercoded.dev"
+          paths:
+            - path: /
+              pathType: Prefix
+
+      tls:
+      - secretName: webring-cert
+        hosts:
+          - "webring.queercoded.dev"
+
+    postgresql:
+      enabled: true
+      primary:
+        persistence:
+          enabled: true
+          size: 4Gi
+          accessMode: ReadWriteOnce
+      auth:
+        database: webring
+        username: webring
+        existingSecret: webring-postgresql
+        secretKeys:
+          userPasswordKey: password
+
+    env:
+      POSTGRES_PASSWORD:
+        valueFrom:
+          secretKeyRef:
+            name: webring-postgresql
+            key: password
+      POSTGRES_USER: webring
+      POSTGRES_DB: webring
+      POSTGRES_HOST: postgres-service
+      POSTGRES_PORT: 5432
+      WEBRING_API_TOKEN:
+        valueFrom:
+          secretKeyRef:
+            name: webring-api-token
+            key: api-token
+      WEBRING_HOST: webring.queercoded.dev
+      WEBRING_PATH: /
+      WEBRING_HTTP_PORT: 80
+      WEBRING_HTTPS_PORT: 443

@@ -1,0 +1,5 @@
+generators:
+  - ./kustomize-secret-generator.yaml
+
+resources:
+  - ./issuer-tonetag.yaml
