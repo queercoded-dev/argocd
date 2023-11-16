@@ -31,6 +31,7 @@ helmCharts:
       WEBRING_PATH: /
       WEBRING_HTTP_PORT: 80
       WEBRING_HTTPS_PORT: 443
+      WEBRING_HTTPS: true
 
     image:
       pullPolicy: Always
